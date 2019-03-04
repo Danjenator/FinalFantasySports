@@ -1,0 +1,43 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'groovy'
+    id 'idea'
+    id 'org.springframework.boot' version '2.1.3.RELEASE'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.finalfantasysports.eureka'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '8'
+
+// Define the main class for the application
+mainClassName = 'com.finalfantasysports.eureka.App'
+
+repositories {
+    jcenter()
+    mavenCentral()
+    maven {
+        url 'https://repo.spring.io/milestone'
+    }
+}
+
+ext {
+  set('springCloudVersion', 'Greenwich.RELEASE')
+}
+
+dependencies {
+    implementation 'com.google.guava:guava:26.0-jre'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.codehaus.groovy:groovy-all:2.5.4'
+    testImplementation 'org.spockframework:spock-core:1.2-groovy-2.5'
+    testImplementation 'junit:junit:4.12'
+}
+
+dependencyManagement {
+  imports {
+    mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+  }
+}
